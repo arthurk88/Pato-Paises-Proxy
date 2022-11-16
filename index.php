@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <title>Consumindo API com AXIOS - Pato</title>
-    <script src="https://unpkg.com/axios@0.21.4/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="import.js"></script>
 </head>
 
@@ -40,7 +40,7 @@
     $url = 'https://patoacademy.network/hit/qrcyfzx-87954';
 
     $a = 0;
-    $n = 0;
+    $n = count($proxies)+1; // 0 somente JS ou count($proxies)+1;  Em caso de uso php+js para request !!! Aviso alta demora !!!
 
     echo "<center><div class='alert alert-dark ' style='width: 90%;'> " . $n . "</div></center>";
 

@@ -3,37 +3,46 @@ const url = 'https://patoacademy.network/hit/qrcyfzx-87954'
 function teste() {
 
   fetch('proxies.txt')
-  .then(response => response.text())
-  .then(text => {
-    array = text.split("\r\n");
+    .then(response => response.text())
+    .then(text => {
+      array = text.split("\r\n");
 
-  const proxies = array;
+      const proxies = array;
 
-  proxies.forEach(proxy => {
+      const length =  proxies.length;
 
-    console.log(proxy);
+      console.log(length);
 
-    var proxys = proxy.split(':');
+      proxies.forEach( async proxy => {
+        try {
+          
+          var proxys = proxy.split(':');
 
-    axios.get('https://patoacademy.network/hit/qrcyfzx-87954',{
-    proxy: {
-      host: proxys[0],
-      port: proxys[1],
-      auth: {username: 'my-user', password: 'my-password'}
-  }})
+          const res = await axios.get('https://patoacademy.network/hit/qrcyfzx-87954', {
+            responseType: 'json',
+            timeout: 10000,
+            proxy: {
+              protocol: 'http',
+              host: proxys[0],
+              port: proxys[1]
+            }
+          })
 
-    .then((res) => { 
-        console.log('ok',res.data.message) 
+
+          console.log('ok', res.data.message)
+
+        } catch (err) {
+          console.log(err);
+        }
+
+
+
+
+
     })
-    .catch((err) => {
-      console.log(err);
-    })
-
-   
-
-  })
 
 })
 }
+
 teste()
 
