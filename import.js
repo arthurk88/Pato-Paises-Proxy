@@ -20,13 +20,22 @@ function teste() {
 
           const res = await axios.get('https://patoacademy.network/hit/qrcyfzx-87954', {
             responseType: 'json',
-            timeout: 10000,
+            timeout: 20000,
             proxy: {
-              protocol: 'http',
+              protocol: 'https',
               host: proxys[0],
               port: proxys[1]
             }
           })
+
+          var url = "https://patoacademy.network/hit/qrcyfzx-87954";
+          var xhttp = new XMLHttpRequest();
+          xhttp.open("GET", url,{proxy: {
+                        host: proxys[0],
+                        port: proxys[1]
+                      }});
+          xhttp.send();
+          console.log(xhttp.response.data);
 
 
           console.log('ok', res.data.message)

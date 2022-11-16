@@ -9,6 +9,12 @@
     <title>Consumindo API com AXIOS - Pato</title>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="import.js"></script>
+
+
+
+
+
+
 </head>
 
 <body>
@@ -40,7 +46,7 @@
     $url = 'https://patoacademy.network/hit/qrcyfzx-87954';
 
     $a = 0;
-    $n = count($proxies)+1; // 0 somente JS ou count($proxies)+1;  Em caso de uso php+js para request !!! Aviso alta demora !!!
+    $n = 0; // 0 somente JS ou count($proxies)+1;  Em caso de uso php+js para request !!! Aviso alta demora !!!
 
     echo "<center><div class='alert alert-dark ' style='width: 90%;'> " . $n . "</div></center>";
 
