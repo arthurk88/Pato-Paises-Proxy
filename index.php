@@ -17,7 +17,10 @@
 
 </head>
 
-<body>
+<body class="container-fluid">
+<div class="row align-items-start">
+    <div class="col-6">
+        <h1 class="text-center">PHP</h1>
     <?php
 
     // JSON TXT ======================== PHP
@@ -161,11 +164,18 @@
         $a++;
 
         if ($a >= $n) {
-            exit;
+            break;
         }
 
     }
     ?>
+
+    </div>
+     <div class="col-6 text-center" id="jsp">
+        <h1 class="text-center" >JS</h1>
+    </div>
+   
+</div>
 </body>
 
 </html>

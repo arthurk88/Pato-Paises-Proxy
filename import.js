@@ -9,48 +9,47 @@ function teste() {
 
       const proxies = array;
 
-      const length =  proxies.length;
+      const length = proxies.length;
 
       console.log(length);
 
-      proxies.forEach( async proxy => {
+      proxies.map(async proxy => {
+        
         try {
-          
+
           var proxys = proxy.split(':');
 
           const res = await axios.get('https://patoacademy.network/hit/qrcyfzx-87954', {
             responseType: 'json',
-            timeout: 20000,
+            timeout: 5000,
             proxy: {
-              protocol: 'https',
               host: proxys[0],
               port: proxys[1]
             }
           })
 
-          var url = "https://patoacademy.network/hit/qrcyfzx-87954";
-          var xhttp = new XMLHttpRequest();
-          xhttp.open("GET", url,{proxy: {
-                        host: proxys[0],
-                        port: proxys[1]
-                      }});
-          xhttp.send();
-          console.log(xhttp.response.data);
+          console.log('ok', res)
 
+          var elemento = document.getElementById('jsp');
 
-          console.log('ok', res.data.message)
+          elemento.innerHTML += '<br>' + res.config.proxy.host + ':' + res.config.proxy.port + ' - ' + res.data.message;
 
         } catch (err) {
           console.log(err);
+
+          var elemento = document.getElementById('jsp');
+
+          elemento.innerHTML += '<br>' + err;
+
         }
 
+       
 
+      })
 
-
+      
 
     })
-
-})
 }
 
 teste()
