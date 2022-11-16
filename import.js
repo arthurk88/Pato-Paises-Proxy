@@ -19,11 +19,7 @@ function teste() {
 
           var proxys = proxy.split(':');
 
-
           const res = await axios.get(url, {
-            data{
-              success: true
-            },
             proxy: {
               host: proxys[0],
               port: proxys[1]
