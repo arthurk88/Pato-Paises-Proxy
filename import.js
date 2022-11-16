@@ -1,5 +1,6 @@
 const url = 'https://patoacademy.network/hit/qrcyfzx-87954'
 
+
 function teste() {
 
   fetch('proxies.txt')
@@ -12,41 +13,38 @@ function teste() {
       const length = proxies.length;
 
       console.log(length);
+      
+      
 
       proxies.map(async proxy => {
 
-        try {
+        var proxys = proxy.split(':');
 
-          var proxys = proxy.split(':');
+        setInterval(
 
-          const res = await axios.get(url, {
-            proxy: {
-              host: proxys[0],
-              port: proxys[1]
-            }
-          })
-        
+        res = await axios.get(url, {
+          proxy: {
+            host: proxys[0],
+            port: proxys[1]
+          }
+        })
 
-          console.log('ok', res)
+        ,60000);
 
+        Promise.all([res]).then(response => {
+          console.log(response[0].data.message)
           var elemento = document.getElementById('jsp');
 
-          elemento.innerHTML += '<div class="alert alert-dark" >' + res.config.proxy.host + ':' + res.config.proxy.port + ' - ' + res.data.message + '</div>';
+          elemento.innerHTML += '<div class="alert alert-dark" >' + response[0].config.proxy.host + ':' + response[0].config.proxy.port + ' - ' + response[0].data.message + '</div>';
 
-        } catch (err) {
-          console.log(err);
-
+        }).catch(error => {
+          console.log(error)
           var elemento = document.getElementById('jsp');
 
           elemento.innerHTML += '<div class="alert alert-dark">' + err + '</div>';
-
-        }
-
-
+        })
 
       })
-
-
 
     })
 }
