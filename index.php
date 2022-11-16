@@ -6,27 +6,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <title>Pato</title>
+    <title>Consumindo API com AXIOS - Pato</title>
+    <script src="https://unpkg.com/axios@0.21.4/dist/axios.min.js"></script>
+    <script src="import.js"></script>
 </head>
 
 <body>
-
     <?php
 
-    // JSON TXT ========================
+    // JSON TXT ======================== PHP
 
     // $json_data = json_decode(file_get_contents('Free_Proxy_List.json'));
-
     // foreach ($json_data as $data) {
-
     // $proxies[] = $data->ip.':'.$data->port;
-
+    // echo  $data->ip.':'.$data->port.'<br>';
     // }
 
+    // JSON TXT ======================== PHP
 
-    // JSON TXT ========================
-
-    // ARQUIVO TXT ========================
+    // ARQUIVO TXT ======================== PHP + JS
 
     $proxies = file('Proxies.txt');
 
@@ -35,14 +33,14 @@
         return trim($proxy);
     }, $proxies);
 
-    // ARQUIVO TXT ========================
+    // ARQUIVO TXT ======================== PHP + JS
 
     set_time_limit(0);
 
     $url = 'https://patoacademy.network/hit/qrcyfzx-87954';
 
     $a = 0;
-    $n = count($proxies)+1;
+    $n = 0;
 
     echo "<center><div class='alert alert-dark ' style='width: 90%;'> " . $n . "</div></center>";
 
@@ -156,9 +154,10 @@
 
         $a++;
 
-        if ($a == $n) {
+        if ($a >= $n) {
             exit;
         }
+
     }
     ?>
 </body>
