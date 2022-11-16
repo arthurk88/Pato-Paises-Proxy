@@ -26,3 +26,22 @@
 //         }).catch(error => {
 //             console.log(error)
 //         })
+
+
+
+
+async function doGetRequest() {
+
+    const res = await axios.get('https://patoacademy.network/hit/qrcyfzx-87954', {
+
+        proxy: {
+            host: proxies[0],
+            port: proxies[1]
+        }
+    });
+
+    console.log(res.data);
+}
+
+
+doGetRequest();
