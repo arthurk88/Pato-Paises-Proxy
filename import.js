@@ -14,43 +14,45 @@ function teste() {
       console.log(length);
 
       proxies.map(async proxy => {
-        
+
         try {
 
           var proxys = proxy.split(':');
 
-          const res = await axios.get('https://patoacademy.network/hit/qrcyfzx-87954', {
-            responseType: 'json',
-            timeout: 5000,
+
+          const res = await axios.get(url, {
+            data{
+              success: true
+            },
             proxy: {
               host: proxys[0],
               port: proxys[1]
             }
           })
+        
 
           console.log('ok', res)
 
           var elemento = document.getElementById('jsp');
 
-          elemento.innerHTML += '<br>' + res.config.proxy.host + ':' + res.config.proxy.port + ' - ' + res.data.message;
+          elemento.innerHTML += '<div class="alert alert-dark" >' + res.config.proxy.host + ':' + res.config.proxy.port + ' - ' + res.data.message + '</div>';
 
         } catch (err) {
           console.log(err);
 
           var elemento = document.getElementById('jsp');
 
-          elemento.innerHTML += '<br>' + err;
+          elemento.innerHTML += '<div class="alert alert-dark">' + err + '</div>';
 
         }
 
-       
+
 
       })
 
-      
+
 
     })
 }
 
 teste()
-

@@ -18,7 +18,7 @@
 </head>
 
 <body class="container-fluid">
-<div class="row align-items-start">
+<div class="row d-flex justify-content-center">
     <div class="col-6">
         <h1 class="text-center">PHP</h1>
     <?php
@@ -49,7 +49,7 @@
     $url = 'https://patoacademy.network/hit/qrcyfzx-87954';
 
     $a = 0;
-    $n = 0; // 0 somente JS ou count($proxies)+1;  Em caso de uso php+js para request !!! Aviso alta demora !!!
+    $n = 1; // 0 somente JS ou count($proxies)+1;  Em caso de uso php+js para request !!! Aviso alta demora !!!
 
     echo "<center><div class='alert alert-dark ' style='width: 90%;'> " . $n . "</div></center>";
 
@@ -171,8 +171,9 @@
     ?>
 
     </div>
-     <div class="col-6 text-center" id="jsp">
+     <div class="col-5 text-center" id="jsp">
         <h1 class="text-center" >JS</h1>
+        <?php echo "<center><div class='alert alert-dark ' style='width: 100%;'> " . $n . "</div></center>"; ?>
     </div>
    
 </div>
