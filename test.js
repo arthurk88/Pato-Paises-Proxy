@@ -1,47 +1,40 @@
+const checkProxy = require('check-proxy').check;
+checkProxy({
+  testHost: 'ping.rhcloud.com', // put your ping server url here
+  proxyIP: '107.151.152.218', // proxy ip to test
+  proxyPort: 80, // proxy port to test
+  localIP: '185.103.27.23', // local machine IP address to test
+  connectTimeout: 6, // curl connect timeout, sec
+  timeout: 10, // curl timeout, sec
+  websites: [
+    {
+      name: 'example',
+      url: 'http://www.example.com/',
+      regex: /example/gim, // expected result - regex
 
+    },
+    {
+      name: 'yandex',
+      url: 'http://www.yandex.ru/',
+      regex: /yandex/gim, // expected result - regex
 
+    },
+    {
+      name: 'google',
+      url: 'http://www.google.com/',
+      regex: function(html) { // expected result - custom function
+        return html && html.indexOf('google') != -1;
+      },
+    },
+    {
+      name: 'amazon',
+      url: 'http://www.amazon.com/',
+      regex: 'Amazon', // expected result - look for this string in the output
+    },
 
-
-// // https://api.github.com/users/arthurk88
-
-//     const proxies = ['222.179.155.90:9091',
-//         '111.225.153.31:8089'];
-
-//         reso = axios.get('https://patoacademy.network/hit/qrcyfzx-87954', {
-//             proxy: {
-//                 protocol: ['https','http'],
-//                 host: '222.179.155.90',
-//                 port: '9091',
-//             }
-//         })
-
-//         console.log('ok', res)
-
-//         Promise.all([res]).then(response => {
-//             console.log(response.data.message)
-//             var elemento = document.getElementById('jsp');
-
-//             elemento.innerHTML += '<div class="alert alert-dark" >' + response.config.proxy.host + ':' + response.config.proxy.port + ' - ' + response.data.message + '</div>';
-
-//         }).catch(error => {
-//             console.log(error)
-//         })
-
-
-
-
-async function doGetRequest() {
-
-    const res = await axios.get('https://patoacademy.network/hit/qrcyfzx-87954', {
-
-        proxy: {
-            host: proxies[0],
-            port: proxies[1]
-        }
-    });
-
-    console.log(res.data);
-}
-
-
-doGetRequest();
+  ]
+}).then(function(res) {
+	console.log('final result', res);
+}, function(err) {
+  console.log('proxy rejected', err);
+});
