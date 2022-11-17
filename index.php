@@ -65,7 +65,6 @@
                 $headers["User-Agent"] = "Curl/1.0";
                 curl_setopt($action, CURLOPT_HTTPHEADER, $headers);
                 curl_setopt($action, CURLOPT_PROXY, $proxy);
-                curl_setopt($action, CURLOPT_URL, $url);
                 curl_setopt($action, CURLOPT_HTTPHEADER, array(
                     'Content-Type: application/json',
                     "Accept: application/json"
@@ -86,8 +85,8 @@
                 $action = curl_init($url);
                 $headers["User-Agent"] = "Curl/1.0";
                 curl_setopt($action, CURLOPT_HTTPHEADER, $headers);
-                curl_setopt($action, CURLOPT_PROXY, $proxy);
                 curl_setopt($action, CURLOPT_URL, $url);
+                curl_setopt($action, CURLOPT_PROXY, 'http://'.$proxy);
                 curl_setopt($action, CURLOPT_HTTPHEADER, array(
                     'Content-Type: application/json',
                     "Accept: application/json"
