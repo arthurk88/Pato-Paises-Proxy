@@ -61,58 +61,50 @@
         if (empty($ex)) {
 
             if ($proxy != "") {
+                $action = curl_init($url);
+                $headers["User-Agent"] = "Curl/1.0";
+                curl_setopt($action, CURLOPT_HTTPHEADER, $headers);
+                curl_setopt($action, CURLOPT_PROXY, $proxy);
+                curl_setopt($action, CURLOPT_HTTPHEADER, array(
+                    'Content-Type: application/json',
+                    "Accept: application/json"
+                ));
+                curl_setopt($action, CURLOPT_HEADER, 0);
+                curl_setopt($action, CURLOPT_FOLLOWLOCATION, 1);
+                curl_setopt($action, CURLOPT_FAILONERROR, 1);
+                curl_setopt($action, CURLOPT_RETURNTRANSFER, 1);
 
-                $prox = explode(':',$proxy);
-                
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, $url);
-                
-                //proxy suport
-                curl_setopt($ch, CURLOPT_PROXY, $prox[0]);
-                curl_setopt($ch, CURLOPT_PROXYPORT, $prox[1]);
-                curl_setopt($ch, CURLOPT_PROXYTYPE, 'HTTP');
-                curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, 1);
-                
-                //https
-                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-                
-                curl_setopt($ch, CURLOPT_USERAGENT, "MozillaXYZ/1.0");
-                curl_setopt($ch, CURLOPT_HEADER, 0);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($ch, CURLOPT_TIMEOUT, 100);
-                       
-                $output = curl_exec($ch);   
+                curl_setopt($action, CURLOPT_CUSTOMREQUEST, "GET");
+                curl_setopt($action, CURLOPT_SSL_VERIFYPEER, false);
 
-                $data = json_decode(curl_exec($ch));
 
-                $info = curl_getinfo($ch);
+                $data = json_decode(curl_exec($action));
+
+                $info = curl_getinfo($action);
             } else {
-                $prox = explode(':',$proxy);
-                
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, $url);
-                
-                //proxy suport
-                curl_setopt($ch, CURLOPT_PROXY, $prox[0]);
-                curl_setopt($ch, CURLOPT_PROXYPORT, $prox[1]);
-                curl_setopt($ch, CURLOPT_PROXYTYPE, 'HTTP');
-                curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, 1);
-                
-                //https
-                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-                
-                curl_setopt($ch, CURLOPT_USERAGENT, "MozillaXYZ/1.0");
-                curl_setopt($ch, CURLOPT_HEADER, 0);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($ch, CURLOPT_TIMEOUT, 100);
-                       
-                $output = curl_exec($ch);   
+                $action = curl_init($url);
+                $headers["User-Agent"] = "Curl/1.0";
+                curl_setopt($action, CURLOPT_HTTPHEADER, $headers);
+                curl_setopt($action, CURLOPT_URL, $url);
+                curl_setopt($action, CURLOPT_PROXY, 'http://'.$proxy);
+                curl_setopt($action, CURLOPT_HTTPHEADER, array(
+                    'Content-Type: application/json',
+                    "Accept: application/json"
+                ));
+                curl_setopt($action, CURLOPT_HEADER, 0);
+                curl_setopt($action, CURLOPT_FOLLOWLOCATION, 1);
+                curl_setopt($action, CURLOPT_CONNECTTIMEOUT, 1);
+                curl_setopt($action, CURLOPT_TIMEOUT_MS, 2000);
+                curl_setopt($action, CURLOPT_FAILONERROR, 1);
+                curl_setopt($action, CURLOPT_RETURNTRANSFER, 1);
 
-                $data = json_decode(curl_exec($ch));
-
-                $info = curl_getinfo($ch);
+                curl_setopt($action, CURLOPT_CUSTOMREQUEST, "GET");
+                curl_setopt($action, CURLOPT_SSL_VERIFYPEER, false);
 
 
+                $data = json_decode(curl_exec($action));
+
+                $info = curl_getinfo($action);
             }
 
 
@@ -120,7 +112,7 @@
                 $ultimo = end($data);
                 echo "<center><div class='alert alert-success ' style='width: 90%;'> " . $a . " #Aprovada <b style='color:green'>✔</b> " . $proxy . " - " . $url . " - " . $ultimo . "";
 
-                if ($errno = curl_errno($ch)) {
+                if ($errno = curl_errno($action)) {
                     $error_message = curl_strerror($errno);
                     echo " - cURL error ({$errno}):\n {$error_message} </div></center>";
                 } else {
@@ -139,7 +131,7 @@
             } else {
                 echo "<center><div class='alert alert-danger' style='width: 90%;'> " . $a . " #Reprovada <b style='color:red'>✘</b> " . $proxy . " - " . $url . "";
 
-                if ($errno = curl_errno($ch)) {
+                if ($errno = curl_errno($action)) {
                     $error_message = curl_strerror($errno);
                     echo " - cURL error ({$errno}):\n {$error_message} </div></center>";
                 } else {
@@ -159,7 +151,7 @@
 
           
 
-            curl_close($ch);
+            curl_close($action);
         } else {
             echo "<center><div class='alert alert-warning' style='width: 90%;'> " . $a . " #Reduzindo Tempo <b style='color:red'>✘</b> " . $proxy . " - " . $url . " - já testado</div></center>";
         }
@@ -183,6 +175,7 @@
 </div>
 <!-- <script src="import.js"></script> -->
     <!-- <script src="test.js"></script> -->
+    <!-- https://www.pauloacosta.com/2018/12/como-se-conectar-atraves-de-proxy.html -->
 </body>
 
 </html>
